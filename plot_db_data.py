@@ -30,10 +30,10 @@ def select_data():
     """Selects all the data from the database"""
     try:
         # Create a connection to the database - # Dont forget to pass in the correct parameters
-        cnx, cursor = createConnection('root','iot_situacionproblema','Tobita2402+','localhost','3306')
+        cnx, cursor = createConnection('sql10651290', 'sql10651290','iJpkYeVBvd', 'sql10.freemysqlhosting.net','3306')
 
         # Query the database
-        query = ("SELECT * FROM dht_data")
+        query = ("SELECT * FROM dht_sensor_data")
 
         # Execute the query
         cursor.execute(query)
@@ -78,13 +78,13 @@ def create_data():
 def insert_data(H, T, D, cnx, cursor):
     try:
         # Create a connection to the database - # Dont forget to pass in the correct parameters
-        cnx, cursor = createConnection('root','iot_situacionproblema','Tobita2402+','localhost','3306')
+        cnx, cursor = createConnection('sql10651290', 'sql10651290','iJpkYeVBvd', 'sql10.freemysqlhosting.net','3306')
 
         results = str(str(H)+','+str(T)+','+"'"+str(D)+"'")
         print(results)
 
         # Query the database
-        query = ("INSERT INTO dht_data(humidity, temperatura, date_time) VALUES("+results+")")
+        query = ("INSERT INTO dht_sensor_data(humidity, temperature, date_time) VALUES("+results+")")
 
         # Execute the query
         cursor.execute(query)
@@ -116,9 +116,9 @@ def insert_data(H, T, D, cnx, cursor):
 #FUNCTIONS
 
 # Create a connection to the database
-cnx, cursor = createConnection('root','iot_situacionproblema','Tobita2402+','localhost','3306')
+cnx, cursor = createConnection('sql10651290', 'sql10651290','iJpkYeVBvd', 'sql10.freemysqlhosting.net','3306')
 select_data()
-
+'''
 for i in range(100):
     hum, temp, dat = create_data() 
 
@@ -129,14 +129,15 @@ for i in range(100):
         # The query string should be an insert statement that inserts the data into the dht_sensor_data table
 
         # Insert the data into the database
-        # TODO: Execute the query string you created
+        # TODO: Execute the query string you created 
 
+'''
 def dataframe(data):
     data = pd.DataFrame(data, columns=["id_dht_data", "humidity", "temperature","date_time"])
-    fig = px.line(data, x="id_dht_data", y=["humidity", "temperature"], title="Line Graph")
+    fig = px.line(data, x="date_time", y=["humidity", "temperature"], title="Line Graph")
     return fig
 
-if _name_=='__main__':
+if __name__=='__main__':
     # TODO: Call the insert_data() function 100 times to insert 100 rows of data into the database
     # Dont forget to delete the pass keyword
     
@@ -151,6 +152,7 @@ if _name_=='__main__':
                 dcc.Graph(figure=fig)
             ])
     ])
+    app.run_server(debug=True)
 
 
 

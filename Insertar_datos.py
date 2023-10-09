@@ -26,10 +26,10 @@ def select_data():
     """Selects all the data from the database"""
     try:
         # Create a connection to the database - # Dont forget to pass in the correct parameters
-        cnx, cursor = createConnection('root', 'iot_situacionproblema','Tobita2402+', 'localhost', '3306')
+        cnx, cursor = createConnection('sql10651290', 'sql10651290','iJpkYeVBvd', 'sql10.freemysqlhosting.net','3306')
 
         # Query the database
-        query = ("SELECT * FROM dht_data")
+        query = ("SELECT * FROM dht_sensor_data")
 
         # Execute the query
         cursor.execute(query)
@@ -74,13 +74,13 @@ def create_data():
 def insert_data(H, T, D, cnx, cursor):
     try:
         # Create a connection to the database - # Dont forget to pass in the correct parameters
-        cnx, cursor = createConnection('root', 'iot_situacionproblema','Tobita2402+', 'localhost', '3306')
+        cnx, cursor = createConnection('sql10651290', 'sql10651290','iJpkYeVBvd', 'sql10.freemysqlhosting.net','3306')
 
         results = str(str(H)+','+str(T)+','+"'"+str(D)+"'")
         print(results)
 
         # Query the database
-        query = ("INSERT INTO dht_data(humidity, temperatura, date_time) VALUES("+results+")")
+        query = ("INSERT INTO dht_sensor_data(humidity, temperature, date_time) VALUES("+results+")")
 
         # Execute the query
         cursor.execute(query)
@@ -112,7 +112,7 @@ def insert_data(H, T, D, cnx, cursor):
 #FUNCTIONS
 
 # Create a connection to the database
-cnx, cursor = createConnection('root', 'iot_situacionproblema','Tobita2402+', 'localhost', '3306')
+cnx, cursor = createConnection('sql10651290', 'sql10651290','iJpkYeVBvd', 'sql10.freemysqlhosting.net','3306')
 select_data()
 
 for i in range(100):
